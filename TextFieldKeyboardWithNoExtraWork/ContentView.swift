@@ -7,9 +7,23 @@
 
 import SwiftUI
 
+extension View {
+    func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct ContentView: View {
+    @State private var someText = ""
+    
     var body: some View {
-        Text("Hello, world!").padding()
+        VStack {
+            TextField("Type text...", text: $someText)
+                .padding()
+            Button("Submit") {
+                dismissKeyboard()
+            }
+        }
     }
 }
 
